@@ -1,4 +1,4 @@
-package kataSgcibTest;
+package katasgcibtest;
 
 import org.junit.Assert;
 import org.junit.Rule;

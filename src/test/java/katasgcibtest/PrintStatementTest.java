@@ -1,4 +1,4 @@
-package kataSgcibTest;
+package katasgcibtest;
 
 import java.time.LocalDate;
 
@@ -34,7 +34,7 @@ public class PrintStatementTest {
 		print.printer(account.printStatement());
 
 		InOrder inOrder = Mockito.inOrder(print);
-		inOrder.verify(print).printer("DATE | OPERATIONS TYPE | AMOUNT" + "\nNo statement yet");
+		inOrder.verify(print).printer("DATE | OPERATIONS TYPE | AMOUNT" + "\nNo statements yet");
 
 	}
 
@@ -47,7 +47,7 @@ public class PrintStatementTest {
 		InOrder inOrder = Mockito.inOrder(print);
 		inOrder.verify(print).printer(
 				"DATE | OPERATIONS TYPE | AMOUNT" + "\n" +
-					date.now() + " | " + OperationsType.depo + " | " + 300);
+					date.now() + " | " + OperationsType.DEPO + " | " + 300);
 
 	}
 
@@ -61,8 +61,8 @@ public class PrintStatementTest {
 		InOrder inOrder = Mockito.inOrder(print);
 		inOrder.verify(print).printer(
 				"DATE | OPERATIONS TYPE | AMOUNT" + "\n" + 
-					date.now() + " | " + OperationsType.depo + " | " + 300+"\n" +
-					date.now() + " | " + OperationsType.depo + " | " + 300+"\n" +
-					date.now() + " | " + OperationsType.draw + " | " + 100);
+					date.now() + " | " + OperationsType.DEPO + " | " + 300+"\n" +
+					date.now() + " | " + OperationsType.DEPO + " | " + 300+"\n" +
+					date.now() + " | " + OperationsType.DRAW + " | " + 100);
 	}
 }

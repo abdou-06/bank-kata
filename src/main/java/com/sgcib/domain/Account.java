@@ -9,7 +9,7 @@ import com.sgcib.domain.enums.OperationsType;
 
 public class Account {
 
-	private List<Operations> statement = new ArrayList<Operations>();
+	private List<Operations> statements = new ArrayList<Operations>();
 	private int balance;
 
 	public Account(int balance) {
@@ -19,7 +19,7 @@ public class Account {
 	public void depo(int amount) {
 		if (amount < 0)
 			throw new RuntimeException(AccountConstant.NEGATIVE_AMOUNT);
-		addOperationsToStatement(new Operations(LocalDate.now(), amount, OperationsType.depo));
+		addOperationsToStatements(new Operations(LocalDate.now(), amount, OperationsType.DEPO));
 		this.balance += amount;
 	}
 
@@ -28,12 +28,13 @@ public class Account {
 			throw new RuntimeException(AccountConstant.NEGATIVE_AMOUNT);
 		if (balance < amount)
 			throw new RuntimeException(AccountConstant.NEGATIVE_BALANCE);
-		addOperationsToStatement(new Operations(LocalDate.now(), amount, OperationsType.draw));
+
+		addOperationsToStatements(new Operations(LocalDate.now(), amount, OperationsType.DRAW));
 		this.balance -= amount;
 	}
 
-	private void addOperationsToStatement(Operations operations) {
-		statement.add(operations);
+	private void addOperationsToStatements(Operations operations) {
+		statements.add(operations);
 	}
 
 	public int getBalance() {
@@ -43,12 +44,10 @@ public class Account {
 	public String printStatement() {
 		StringBuilder stringToPrint = new StringBuilder(AccountConstant.HEADER);
 
-		if (!this.statement.isEmpty()) {
-			for (Operations operations : this.statement) {
-				stringToPrint.append("\n" + operations.toString());
-			}
+		if (!this.statements.isEmpty()) {
+			statements.forEach(statements -> stringToPrint.append("\n"+statements));
 		} else {
-			stringToPrint.append("\nNo statement yet");
+			stringToPrint.append(AccountConstant.EMPTY_STATEMENTS);
 		}
 		return stringToPrint.toString();
 	}
